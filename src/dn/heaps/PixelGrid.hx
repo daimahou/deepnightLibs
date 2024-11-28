@@ -14,7 +14,8 @@ class PixelGrid extends h2d.Object {
 	/** Height in cells **/
 	public var hei(default,null) : Int;
 
-	public var gridSize(default,set) : Int;
+	public var gridWidth(default,set) : Int;
+	public var gridHeight(default,set) : Int;
 
 	var tg : h2d.TileGroup;
 	var pixelTile : h2d.Tile;
@@ -25,7 +26,7 @@ class PixelGrid extends h2d.Object {
 	public var optimize = true;
 
 
-	public function new(gridSize:Int, wid:Int, hei:Int, ?parent:h2d.Object) {
+	public function new(width:Int, height:Int, wid:Int, hei:Int, ?parent:h2d.Object) {
 		super(parent);
 
 		this.wid = wid;
@@ -34,7 +35,8 @@ class PixelGrid extends h2d.Object {
 		pixelTile = h2d.Tile.fromColor(0xffffff, 1, 1);
 		tg = new h2d.TileGroup(pixelTile, this);
 
-		this.gridSize = gridSize;
+		this.gridWidth = width;
+		this.gridHeight = height;
 	}
 
 	public inline function dispose() {
@@ -119,11 +121,15 @@ class PixelGrid extends h2d.Object {
 				line( pts[0].x, pts[0].y, pts[pts.length-1].x, pts[pts.length-1].y, c, a );
 		}
 	}
+	
+	inline function set_gridWidth(w:Int) {
+		tg.scaleX = w;
+		return gridWidth = w;
+	}
 
-
-	inline function set_gridSize(g:Int) {
-		tg.scaleX = tg.scaleY = g;
-		return gridSize = g;
+	inline function set_gridHeight(h:Int) {
+		tg.scaleY = h;
+		return gridHeight = h;
 	}
 
 	/** Clear all pixels **/
