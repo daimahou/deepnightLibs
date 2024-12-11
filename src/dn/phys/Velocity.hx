@@ -96,7 +96,7 @@ class Velocity {
 	}
 
 	/** Set individual frictions **/
-	public inline function setFricts(fx:Float, fy:Float, fz:Float) {
+	public inline function setFricts(fx:Float, fy:Float, fz:Float = 1.0) {
 		frictX = fx;
 		frictY = fy;
 		frictZ = fz;
